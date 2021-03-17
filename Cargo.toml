@@ -1,0 +1,16 @@
+[package]
+name = "schwifty"
+description = "A simple IBAN validation library inspired by Python's schwifty."
+documentation = "https://docs.rs/schwifty"
+homepage = "https://github.com/Elinvynia/schwifty"
+repository = "https://github.com/Elinvynia/schwifty.git"
+keywords = ["schwifty", "IBAN", "validation"]
+authors = ["Elinvynia <59487684+Elinvynia@users.noreply.github.com>"]
+readme = "README.md"
+license = "MIT/Apache-2.0"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+regex = "1.4"
+uint = "0.9"
