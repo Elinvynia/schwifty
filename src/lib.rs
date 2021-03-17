@@ -29,8 +29,11 @@ pub mod country;
 pub mod error;
 pub mod iban;
 
-uint::construct_uint! {
-    pub struct U256(4);
+#[allow(clippy::all)]
+pub(crate) mod u256 {
+    uint::construct_uint! {
+        pub struct U256(4);
+    }
 }
 
 /// Checks if the provided string is a valid IBAN, or tells you why it isn't.
@@ -83,7 +86,7 @@ pub fn validate<I: AsRef<str>>(input: I) -> Result<IBan, ValidationError> {
     }
 
     // This will not panic as u256 can hold any IBAN.
-    let integer = U256::from_dec_str(&integer_string).unwrap();
+    let integer = u256::U256::from_dec_str(&integer_string).unwrap();
 
     // Make sure that the remainder is one.
     if integer % 97 != 1.into() {

@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: Swatinem/rust-cache@v1
-    - run: cargo clippy
+    - run: cargo clippy -- -D warnings
 
   stable:
     needs: format
