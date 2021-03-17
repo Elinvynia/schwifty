@@ -291,11 +291,30 @@ impl Country {
         use Country::*;
         let end = input.len() - 1;
         let (start, stop) = match self {
-            Albania | Andorra | Belarus | Cyprus | Egypt | Germany | Guatemala | Jordan | Poland | SaoTomePrincipe => (12, end),
-            Azerbaijan | Bahrain | CostaRica | Denmark | DominicanRepublic | ElSalvador | Gibraltar | Greenland | Kosovo | Kuwait | Latvia | Lebanon | Netherlands | Pakistan | PalestinianTerritories | Qatar | Romania | SaintLucia | VirginIslands => (8, end),
+            Albania | Andorra | Belarus | Cyprus | Egypt | Germany | Guatemala | Jordan
+            | Poland | SaoTomePrincipe => (12, end),
+            Azerbaijan
+            | Bahrain
+            | CostaRica
+            | Denmark
+            | DominicanRepublic
+            | ElSalvador
+            | Gibraltar
+            | Greenland
+            | Kosovo
+            | Kuwait
+            | Latvia
+            | Lebanon
+            | Netherlands
+            | Pakistan
+            | PalestinianTerritories
+            | Qatar
+            | Romania
+            | SaintLucia
+            | VirginIslands => (8, end),
             Austria | Liechenstein | Lithuania | Switzerland | UnitedArabEmirates => (9, end),
             Belgium | EastTimor | NorthMacedonia | Montenegro | Serbia => (7, end - 2),
-            BosniaHerzegovina => (10 , end - 2),
+            BosniaHerzegovina => (10, end - 2),
             Brazil => (17, end - 2),
             Bulgaria | CzechRepublic | Slovakia | Spain => (14, end),
             Croatia | Greece | Iraq => (11, end),

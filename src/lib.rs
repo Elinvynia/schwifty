@@ -16,7 +16,6 @@
 //! [crate-link]: https://crates.io/crates/schwifty
 //! [crate-version]: https://img.shields.io/crates/v/schwifty.svg?style=flat-square
 
-
 #![forbid(unsafe_code)]
 #![warn(missing_debug_implementations)]
 #![warn(missing_docs)]
