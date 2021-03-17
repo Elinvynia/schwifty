@@ -1,4 +1,4 @@
-//! IBAN docs
+//! Module for the IBAN representation and methods.
 
 use crate::country::Country;
 
