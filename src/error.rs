@@ -10,7 +10,7 @@ pub enum ValidationError {
     /// IBAN cannot contain non-alphanumeric characters.
     InvalidChar,
     /// The IBAN checksum was invalid (remainder of mod 97 was not 1).
-    InvalidIBAN,
+    InvalidIban,
     /// Input didn't contain a supported country code.
     InvalidCountryCode,
     /// IBAN length didn't match the detected country.
@@ -29,7 +29,7 @@ impl Display for ValidationError {
         let msg = match self {
             TooLong => "Input is longer than 34 characters.",
             InvalidChar => "Input contains at least one invalid character.",
-            InvalidIBAN => "IBAN mod 97 checksum is invalid.",
+            InvalidIban => "IBAN mod 97 checksum is invalid.",
             InvalidCountryCode => "Input doesn't contain a supported country.",
             InvalidLength => "Input is invalid length for the detected country.",
             InvalidFormat => "IBAN has the wrong format for the detected country.",

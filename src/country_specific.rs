@@ -47,18 +47,6 @@ impl Country {
                 total % 11 == 0
             }
             Internet => &input[0..2] == "AA",
-            Montenegro => {
-                let check_digits = self.check_digits(input) as u128;
-                let account_number = self.account_number(input);
-                let remainder = account_number % 97;
-                let complement = 98 - remainder;
-
-                println!(
-                    "check digit is - {}, complement is {}",
-                    check_digits, complement
-                );
-                complement == check_digits
-            }
             _ => true,
         }
     }

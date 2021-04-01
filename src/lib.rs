@@ -128,7 +128,7 @@ pub fn validate<I: AsRef<str>>(input: I) -> Result<IBan, ValidationError> {
 
     // Make sure that the remainder is one.
     if integer % 97 != 1.into() {
-        return Err(ValidationError::InvalidIBAN);
+        return Err(ValidationError::InvalidIban);
     }
 
     Ok(IBan {
