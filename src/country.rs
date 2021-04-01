@@ -1,4 +1,4 @@
-//! Country docs
+//! Countries supported by IBAN and helper methods.
 
 use regex::Regex;
 use std::fmt::{self, Display};
@@ -40,6 +40,7 @@ pub enum Country {
     Guatemala,
     Hungary,
     Iceland,
+    Internet,
     Iraq,
     Ireland,
     Israel,
@@ -148,6 +149,7 @@ impl Country {
             Guatemala => 28,
             Hungary => 28,
             Iceland => 26,
+            Internet => 16,
             Iraq => 23,
             Ireland => 22,
             Israel => 23,
@@ -234,6 +236,7 @@ impl Country {
             Guatemala => f!(c(4), c(20)),
             Hungary => f!(n(24)),
             Iceland => f!(n(22)),
+            Internet => f!(n(4), c(8)),
             Iraq => f!(a(4), n(15)),
             Ireland => f!(c(4), n(14)),
             Israel => f!(n(19)),
@@ -301,6 +304,7 @@ impl Country {
             | ElSalvador
             | Gibraltar
             | Greenland
+            | Internet
             | Kosovo
             | Kuwait
             | Latvia
@@ -368,6 +372,7 @@ impl Country {
             | Gibraltar
             | Greenland
             | Guatemala
+            | Internet
             | Iraq
             | Jordan
             | Kosovo
@@ -453,6 +458,7 @@ impl FromStr for Country {
             "HU" => Ok(Country::Hungary),
             "IS" => Ok(Country::Iceland),
             "IQ" => Ok(Country::Iraq),
+            "AA" => Ok(Country::Internet),
             "IE" => Ok(Country::Ireland),
             "IL" => Ok(Country::Israel),
             "IT" => Ok(Country::Italy),
@@ -540,6 +546,7 @@ impl Display for Country {
             Hungary => "HU",
             Iceland => "IS",
             Iraq => "IQ",
+            Internet => "AA",
             Ireland => "IE",
             Israel => "IL",
             Italy => "IT",

@@ -22,17 +22,47 @@
 
 pub use crate::country::Country;
 pub use crate::error::ValidationError;
-pub use crate::iban::IBan;
 use std::str::FromStr;
 
 pub mod country;
+pub(crate) mod country_specific;
 pub mod error;
-pub mod iban;
 
 #[allow(clippy::all)]
 pub(crate) mod u256 {
     uint::construct_uint! {
-        pub struct U256(4);
+        pub(crate) struct U256(4);
+    }
+}
+
+/// Represents an IBAN and provides helpful methods.
+#[derive(Debug)]
+#[non_exhaustive]
+pub struct IBan {
+    /// The country of this IBAN.
+    pub country: Country,
+    pub(crate) raw: String,
+}
+
+impl IBan {
+    /// Returns the account number of the IBAN.
+    pub fn account_number(&self) -> u128 {
+        self.country.account_number(&self.raw)
+    }
+
+    /// Returns the national bank code of the IBAN.
+    pub fn bank_code(&self) -> String {
+        self.country.bank_code(&self.raw)
+    }
+
+    /// Returns the country code as a String, for example "GB".
+    pub fn country_code(&self) -> String {
+        self.country.to_string()
+    }
+
+    /// Access the raw String this IBAN was made from.
+    pub fn raw(&self) -> &str {
+        &self.raw
     }
 }
 
@@ -53,18 +83,26 @@ pub fn validate<I: AsRef<str>>(input: I) -> Result<IBan, ValidationError> {
         return Err(ValidationError::InvalidChar);
     };
 
+    // See if it is a valid Country
     let country_code = &input[0..2];
     let country = match Country::from_str(country_code) {
         Ok(c) => c,
         Err(_) => return Err(ValidationError::InvalidCountryCode),
     };
 
+    // Since it is a valid country, check if it is the proper length.
     if input.len() != country.length() {
         return Err(ValidationError::InvalidLength);
     }
 
+    // Also check if the format matches
     if !country.format().is_match(&input) {
         return Err(ValidationError::InvalidFormat);
+    }
+
+    // Do country-specifich checks.
+    if !country.custom_validation(&input) {
+        return Err(ValidationError::CountryCheckFailed);
     }
 
     // Put the country code to the end of the string.

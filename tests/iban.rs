@@ -81,4 +81,5 @@ fn validate_iban_basic() {
     validate("FO62 6460 0001 6316 34").unwrap(); // Faroe Islands
     validate("GL89 6471 0001 0002 06").unwrap(); // Grenland
     validate("IQ98 NBIQ 8501 2345 6789 012").unwrap(); // Iraq
+    validate("AA11 0011 123Z 5678").unwrap(); // Internet
 }

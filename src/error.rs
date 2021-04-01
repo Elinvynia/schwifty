@@ -9,7 +9,7 @@ pub enum ValidationError {
     TooLong,
     /// IBAN cannot contain non-alphanumeric characters.
     InvalidChar,
-    /// The IBAN checksum was invalid (remainder was not 1).
+    /// The IBAN checksum was invalid (remainder of mod 97 was not 1).
     InvalidIBAN,
     /// Input didn't contain a supported country code.
     InvalidCountryCode,
@@ -17,6 +17,8 @@ pub enum ValidationError {
     InvalidLength,
     /// The format was wrong for the detected country.
     InvalidFormat,
+    /// A custom check this country implements has failed.
+    CountryCheckFailed,
 }
 
 impl std::error::Error for ValidationError {}
@@ -24,13 +26,15 @@ impl std::error::Error for ValidationError {}
 impl Display for ValidationError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         use ValidationError::*;
-        match self {
-            TooLong => write!(f, "Input is too long."),
-            InvalidChar => write!(f, "Input contains invalid character."),
-            InvalidIBAN => write!(f, "IBAN checksum is invalid."),
-            InvalidCountryCode => write!(f, "Input doesn't contain a country."),
-            InvalidLength => write!(f, "Input is invalid length for the country."),
-            InvalidFormat => write!(f, "IBAN has the wrong format for the country."),
-        }
+        let msg = match self {
+            TooLong => "Input is longer than 34 characters.",
+            InvalidChar => "Input contains at least one invalid character.",
+            InvalidIBAN => "IBAN mod 97 checksum is invalid.",
+            InvalidCountryCode => "Input doesn't contain a supported country.",
+            InvalidLength => "Input is invalid length for the detected country.",
+            InvalidFormat => "IBAN has the wrong format for the detected country.",
+            CountryCheckFailed => "Failed custom country-specific check.",
+        };
+        write!(f, "{}", msg)
     }
 }
