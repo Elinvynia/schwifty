@@ -236,7 +236,7 @@ impl Country {
             Guatemala => f!(c(4), c(20)),
             Hungary => f!(n(24)),
             Iceland => f!(n(22)),
-            Internet => f!(n(4), c(8)),
+            Internet => f!(c(12)),
             Iraq => f!(a(4), n(15)),
             Ireland => f!(c(4), n(14)),
             Israel => f!(n(19)),
@@ -290,7 +290,7 @@ impl Country {
     }
 
     // Same reference as above.
-    pub(crate) fn account_number(&self, input: &str) -> u128 {
+    pub(crate) fn account_number(&self, input: &str) -> String {
         use Country::*;
         let end = input.len() - 1;
         let (start, stop) = match self {
@@ -341,7 +341,7 @@ impl Country {
             Turkey | Ukraine => (10, end),
         };
 
-        input[start..=stop].parse().unwrap()
+        input[start..=stop].into()
     }
 
     // Same reference as above.

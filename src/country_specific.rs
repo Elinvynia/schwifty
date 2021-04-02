@@ -46,7 +46,6 @@ impl Country {
 
                 total % 11 == 0
             }
-            Internet => &input[0..2] == "AA",
             _ => true,
         }
     }

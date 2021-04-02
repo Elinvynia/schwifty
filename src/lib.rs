@@ -38,15 +38,15 @@ pub(crate) mod u256 {
 /// Represents an IBAN and provides helpful methods.
 #[derive(Debug)]
 #[non_exhaustive]
-pub struct IBan {
+pub struct Iban {
     /// The country of this IBAN.
     pub country: Country,
     pub(crate) raw: String,
 }
 
-impl IBan {
+impl Iban {
     /// Returns the account number of the IBAN.
-    pub fn account_number(&self) -> u128 {
+    pub fn account_number(&self) -> String {
         self.country.account_number(&self.raw)
     }
 
@@ -67,7 +67,7 @@ impl IBan {
 }
 
 /// Checks if the provided string is a valid IBAN, or tells you why it isn't.
-pub fn validate<I: AsRef<str>>(input: I) -> Result<IBan, ValidationError> {
+pub fn validate<I: AsRef<str>>(input: I) -> Result<Iban, ValidationError> {
     let input = input.as_ref();
 
     // Remove the whitespace.
@@ -131,7 +131,7 @@ pub fn validate<I: AsRef<str>>(input: I) -> Result<IBan, ValidationError> {
         return Err(ValidationError::InvalidIban);
     }
 
-    Ok(IBan {
+    Ok(Iban {
         country,
         raw: input,
     })
