@@ -87,4 +87,6 @@ fn validate_iban_basic() {
 #[test]
 fn validate_iban_empty() {
     assert!(matches!(validate(""), Err(ValidationError::InvalidCountryCode)));
+    assert!(matches!(validate("F"), Err(ValidationError::InvalidCountryCode)));
+    assert!(matches!(validate("FR"), Err(ValidationError::InvalidLength)));
 }
