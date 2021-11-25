@@ -14,4 +14,5 @@ A simple IBAN validation library inspired by Python's `schwifty`.
 [docs]: https://docs.rs/schwifty
 [docs-badge]: https://img.shields.io/badge/docs-online-5023dd.svg?style=flat-square
 [crate-link]: https://crates.io/crates/schwifty
-[crate-version]: https://img.shields.io/crates/v/schwifty.svg?style=flat-square
+[crate-version]: https://img.shields.io/crates/v/schwifty?style=flat-square
+
