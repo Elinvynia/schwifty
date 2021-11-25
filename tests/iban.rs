@@ -83,3 +83,10 @@ fn validate_iban_basic() {
     validate("IQ98 NBIQ 8501 2345 6789 012").unwrap(); // Iraq
     validate("AA11 0011 123Z 5678").unwrap(); // Internet
 }
+
+#[test]
+fn validate_iban_empty() {
+    assert!(matches!(validate(""), Err(ValidationError::InvalidCountryCode)));
+    assert!(matches!(validate("F"), Err(ValidationError::InvalidCountryCode)));
+    assert!(matches!(validate("FR"), Err(ValidationError::InvalidLength)));
+}

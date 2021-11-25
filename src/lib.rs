@@ -83,6 +83,11 @@ pub fn validate<I: AsRef<str>>(input: I) -> Result<Iban, ValidationError> {
         return Err(ValidationError::InvalidChar);
     };
 
+    // IBAN must have at least 2 characters to match a country code.
+    if input.len() < 2 {
+        return Err(ValidationError::InvalidCountryCode);
+    };
+
     // See if it is a valid Country
     let country_code = &input[0..2];
     let country = match Country::from_str(country_code) {
