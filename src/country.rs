@@ -90,7 +90,7 @@ pub enum Country {
     VirginIslands,
 }
 
-// Helper functions for the regex groups.
+// Helper functions for the regex.
 fn n(num: usize) -> String {
     format!("[0-9]{{{}}}", num)
 }
